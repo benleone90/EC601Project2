@@ -7,7 +7,8 @@ from google.cloud.language import types
 client = language.LanguageServiceClient()
 
 # The text to analyze
-text = ['Hello, world!', 'this class sucks!', 'where is the bathroom?']
+text = ['Hello, world!', 'I love this class!',
+        'I will get an A in all my classes!']
 for x in text:
     document = types.Document(
         content=x,
