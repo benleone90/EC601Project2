@@ -7,13 +7,14 @@ from google.cloud.language import types
 client = language.LanguageServiceClient()
 
 # The text to analyze
-text = 'We need to build the wall!'
-document = types.Document(
-    content=text,
-    type=enums.Document.Type.PLAIN_TEXT)
+text = ['Hello, world!', 'this class sucks!', 'where is the bathroom?']
+for x in text:
+    document = types.Document(
+        content=x,
+        type=enums.Document.Type.PLAIN_TEXT)
 
-# Detects the sentiment of the text
-sentiment = client.analyze_sentiment(document=document).document_sentiment
+    # Detects the sentiment of the text
+    sentiment = client.analyze_sentiment(document=document).document_sentiment
 
-print('Text: {}'.format(text))
-print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))
+    print('Text: {}'.format(x))
+    print('Sentiment: {}, {}'.format(sentiment.score, sentiment.magnitude))

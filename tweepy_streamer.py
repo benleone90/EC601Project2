@@ -1,5 +1,3 @@
-import tweepy
-
 from tweepy import API
 from tweepy import Cursor
 from tweepy.streaming import StreamListener
@@ -16,10 +14,15 @@ class TwitterClient():
         self.twitter_client = API(self.auth)
         self.twitter_user = twitter_user
 
+    def get_twitter_client_api(self):
+        return self.twitter_client
+
     def get_user_tweets(self, num_tweets):
         tweets = []
         for tweet in Cursor(self.twitter_client.user_timeline, id=self.twitter_user).items(num_tweets):
-            tweets.append(tweet)
+            tweets.append(tweet.text)
+            # with open("tweets.json", 'a') as doc:
+            #     doc.write(tweet.text)
         return tweets
 
 
@@ -73,11 +76,22 @@ class TwitterListener(StreamListener):
         print(status)
 
 
-if __name__ == "__main__":
-    hashtag_list = ["Ruth Bader Ginsburg"]
-    fetched_tweets = "tweets.json"
+# TWEET ANALYZER #
+class TweetAnalyzer():
+    pass
 
-    twitter_client = TwitterClient('benshapiro')
-    print(twitter_client.get_user_tweets(1))
+
+if __name__ == "__main__":
+    twitter_client = TwitterClient()
+    api = twitter_client.get_twitter_client_api()
+
+    tweets = api.user_timeline(screen_name="realDonaldTrump", count=1)
+    print(tweets)
+
+    # hashtag_list = ["Ruth Bader Ginsburg"]
+    # fetched_tweets = "tweets.json"
+
+    #twitter_client = TwitterClient('benshapiro')
+    #print(twitter_client.get_user_tweets(15))
     # twitter_streamer = TwitterStream()
     # twitter_streamer.stream_tweets(fetched_tweets, hashtag_list)
