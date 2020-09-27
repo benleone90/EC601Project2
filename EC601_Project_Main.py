@@ -10,11 +10,12 @@ from google.cloud import language
 from google.cloud.language import enums
 from google.cloud.language import types
 
-# Imports Twitter API credentials
+# Imports Twitter API credentials and creates Google NPL client
 import twitter_credentials
+client = language.LanguageServiceClient()
 
-# Empty array for tweets to be filled by Twitter client
-# and analyzed by Goole NLP
+# Empty array for tweets to be filled
+# by Twitter client and analyzed by Goole NLP
 tweets = []
 
 # Twitter Authenticator
@@ -37,8 +38,8 @@ class TwitterClient():
         self.twitter_user = twitter_user
 
     def get_user_tweets(self, num_tweets):
-        for tweet in Cursor(self.twitter_client.user_timeline, id=self.twitter_user).items(num_tweets):
-            tweets.append(tweet)
+        for tweet in Cursor(self.twitter_client.user_timeline, id=self.twitter_user, tweet_mode="extended").items(num_tweets):
+            tweets.append(tweet.full_text)
 
     def twitter_client_api(self):
         return self.twitter_client
@@ -46,15 +47,26 @@ class TwitterClient():
 
 # Main function
 if __name__ == "__main__":
-    twitter_client = TwitterClient()
-    api = twitter_client.twitter_client_api()
-
-    status = api.user_timeline("ben_leone", tweet_mode="extended")
-    print(status.full_text)
-    ######################
-    # person1 = input("Enter first person: ")
-    # num = int(input("How many tweets would you like to see: "))
-    # twitter_client = TwitterClient(person1)
-    # twitter_client.get_user_tweets(num)
-    # for x in tweets:
-    # print(x)
+    print("##########################\n\nWelcome to Tweet Analyzer!\n\n##########################")
+    prog_input = 0
+    prog_input = input(
+        "Which program would you like to run?\n 1. User tweet sentiment analyzer (@username, # tweets)\n 2. Compare two users most recent tweet sentiment (@username, @username)\nProgram: ")
+    if int(prog_input) == 1:
+        t_handle = input("Enter user's Twitter handle (after the @): ")
+        tweet_nums = int(input("Enter # of tweets to analyze: "))
+        twitter_client = TwitterClient(t_handle)
+        twitter_client.get_user_tweets(tweet_nums)
+        for x in tweets:
+            document = types.Document(
+                content=x, type=enums.Document.Type.PLAIN_TEXT)
+            # Detects the sentiment of the text
+            sentiment = client.analyze_sentiment(
+                document=document).document_sentiment
+            print("Tweet text: {}".format(x))
+            print("Sentiment score(-1.0 to 1.0): {}".format(sentiment.score))
+            print("Sentiment magnitue(0 to inf): {}".format(sentiment.magnitude))
+    elif prog_input == 2:
+        print("Program 2")
+    else:
+        print("Invalid program")
+        exit()
