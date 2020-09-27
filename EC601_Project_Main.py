@@ -65,8 +65,36 @@ if __name__ == "__main__":
             print("Tweet text: {}".format(x))
             print("Sentiment score(-1.0 to 1.0): {}".format(sentiment.score))
             print("Sentiment magnitue(0 to inf): {}".format(sentiment.magnitude))
-    elif prog_input == 2:
-        print("Program 2")
+    elif int(prog_input) == 2:
+        person1 = input("Enter first user's twitter handle (after the @): ")
+        twitter_client1 = TwitterClient(person1)
+        twitter_client1.get_user_tweets(1)
+        for x in tweets:
+            document1 = types.Document(
+                content=x, type=enums.Document.Type.PLAIN_TEXT)
+            # Detects the sentiment of the text
+            sentiment1 = client.analyze_sentiment(
+                document=document1).document_sentiment
+        score1 = sentiment1.score
+        magnitude1 = sentiment1.magnitude
+        print(tweets[0])
+        print(score1)
+        print(magnitude1)
+        #######
+        tweets.clear()
+        person2 = input("Enter second user's twitter handle (after the @): ")
+        twitter_client2 = TwitterClient(person2)
+        twitter_client2.get_user_tweets(1)
+        for x in tweets:
+            document2 = types.Document(
+                content=x, type=enums.Document.Type.PLAIN_TEXT)
+            sentiment2 = client.analyze_sentiment(
+                document=document2).document_sentiment
+        score2 = sentiment2.score
+        magnitude2 = sentiment2.magnitude
+        print(tweets[0])
+        print(score2)
+        print(magnitude2)
     else:
         print("Invalid program")
         exit()

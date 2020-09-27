@@ -82,16 +82,7 @@ class TweetAnalyzer():
 
 
 if __name__ == "__main__":
-    twitter_client = TwitterClient()
-    api = twitter_client.get_twitter_client_api()
-
-    tweets = api.user_timeline(screen_name="realDonaldTrump", count=1)
-    print(tweets)
-
-    # hashtag_list = ["Ruth Bader Ginsburg"]
-    # fetched_tweets = "tweets.json"
-
-    #twitter_client = TwitterClient('benshapiro')
-    #print(twitter_client.get_user_tweets(15))
-    # twitter_streamer = TwitterStream()
-    # twitter_streamer.stream_tweets(fetched_tweets, hashtag_list)
+    hashtag_list = ["Ruth Bader Ginsburg"]
+    fetched_tweets = "tweets.json"
+    twitter_streamer = TwitterStream()
+    twitter_streamer.stream_tweets(fetched_tweets, hashtag_list)
