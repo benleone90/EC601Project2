@@ -8,5 +8,15 @@ The primary test/user case is with in the "project_main" file. This test allows 
 The secondary test that can be run in this document is to stream tweets based of certain hashtags or text.
 ##
 Lastly, a user is able to compare the sentiment of two accounts and their most recents tweets. The program will output both tweets and their sentiment and display which is more positive.
+## Tweet Analyzer MVP
+The minimum viable product of this project is to be able to accept user inputs for Twitter handles and have the Tweepy API query Twitter to recieve the correct number of tweets requested. The program must then pass these tweets to the Google Natual Language Processing API and return the sentiment and magnitude of what was sent.
+## Potential Users
+* Student who wants to analyze a user's Twitter feed sentiment
+* Journalists who want to see if VIPs are using their influence for postitive or negative outcomes
+* Researchers to track sentiment over time
+## User Stories
+* A user would like to see if tweets I am seeing daily are positive or negative.
+* A user wants to evaluate if the sentiment of a tweet impacts their feelings on an issue/group/person.
+* A user wants to see if people are reacting more positively or negatively to unfolding events.
 ## Issues
 * Unable to extract "full_text" tweets from JSON

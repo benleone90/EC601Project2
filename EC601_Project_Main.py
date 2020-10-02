@@ -75,11 +75,9 @@ if __name__ == "__main__":
             # Detects the sentiment of the text
             sentiment1 = client.analyze_sentiment(
                 document=document1).document_sentiment
+        tweet1 = tweets[0]
         score1 = sentiment1.score
         magnitude1 = sentiment1.magnitude
-        # print(tweets[0])
-        # print(score1)
-        # print(magnitude1)
         ####################################
         tweets.clear()
         person2 = input("Enter second user's twitter handle (after the @): ")
@@ -90,11 +88,18 @@ if __name__ == "__main__":
                 content=x, type=enums.Document.Type.PLAIN_TEXT)
             sentiment2 = client.analyze_sentiment(
                 document=document2).document_sentiment
+        tweet2 = tweets[0]
         score2 = sentiment2.score
         magnitude2 = sentiment2.magnitude
-        # print(tweets[0])
-        # print(score2)
-        # print(magnitude2)
+        print(person1 + "'s tweet: " + tweet1)
+        print("Sentiment score: " + score1)
+        print(person2 + "'s tweet: " + tweet2)
+        print("Sentiemet score: " + score2)
+        print("##########################")
+        if score1 > score2:
+            print(person1 + " has a higher sentiment score")
+        else:
+            print(person2 + " has a higher sentiment score")
     else:
         print("Invalid program")
         exit()
