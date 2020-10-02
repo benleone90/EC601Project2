@@ -77,10 +77,10 @@ if __name__ == "__main__":
                 document=document1).document_sentiment
         score1 = sentiment1.score
         magnitude1 = sentiment1.magnitude
-        print(tweets[0])
-        print(score1)
-        print(magnitude1)
-        #######
+        # print(tweets[0])
+        # print(score1)
+        # print(magnitude1)
+        ####################################
         tweets.clear()
         person2 = input("Enter second user's twitter handle (after the @): ")
         twitter_client2 = TwitterClient(person2)
@@ -92,9 +92,9 @@ if __name__ == "__main__":
                 document=document2).document_sentiment
         score2 = sentiment2.score
         magnitude2 = sentiment2.magnitude
-        print(tweets[0])
-        print(score2)
-        print(magnitude2)
+        # print(tweets[0])
+        # print(score2)
+        # print(magnitude2)
     else:
         print("Invalid program")
         exit()
