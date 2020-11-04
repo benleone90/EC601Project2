@@ -131,3 +131,4 @@ dmypy.json
 # Twitter credentials
 twitter_credentials.py
 google_credentials.json
+.vscode
