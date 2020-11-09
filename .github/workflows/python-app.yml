@@ -36,6 +36,3 @@ jobs:
        CONSUMER_SECRET: ${{ secrets.CONSUMER_SECRET }}
        ACCESS_KEY: ${{ secrets.ACCESS_KEY }}
        ACCESS_SECRET: ${{ secrets.ACCESS_SECRET }}
-    - name: Test with pytest
-      run: |
-        pytest
